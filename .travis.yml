@@ -1,0 +1,30 @@
+language: ruby
+rvm:
+- 2.0.0
+bundler_args: "--without production"
+addons:
+  postgresql: '9.3'
+services:
+- postgresql
+before_script:
+- cp config/database.yml.travis config/database.yml
+- psql -c 'create database travis_ci_test;' -U postgres
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+script:
+- bundle exec rspec
+notifications:
+  email:
+    on_success: always
+    on_failure: always
+deploy:
+  provider: heroku
+  app: sheltered-bastion-22670
+  on:
+    repo: carmelocuenca/shopaddict
+  # Previously, include the GitHub repository to Travis-CI, then
+  # To generate the api_key
+  #   Add to Gemfile: gem 'travis', group: :development
+  #   Run:
+  #     travis encrypt $(heroku auth:token) --add deploy.api_key
+  api_key:
+    secure: Ykp74cdDnaEX+LQdF8DjwsxZNIZ0vVJGuhcC0XPTJf9ndGWpIFhczojzuHJJP6jBL/6qxzWkM21QCbSJkuHxhBqI9hpY+KFcUqmR1jPFBcE0X4o6FF07FbKRtL7n1+gBuShJDTNellbti0AKGSS3f6dN/M4kFStaG4mLoRfYwsJI1k5oyYI6XDScaIZVUSKHvLjHYJprwwtaFDiQK8t8b2O4Zie0YVVpLEZBYWyOPVxImBrH/sSxnGSWd0BsJLbCdMln+lHT9XGC6QHl4/HBwPeFZ2ib1zKKzaZc+Np3pm7ejMMsU2wp/Di2E6UtubjM0B09T8u1NZIQW4hFb0csP/CUzVZpO4vmUzOR0Xpi1+PdcxpgJYZ8uPeEdkG1WQIPst1nZVCFlXvC3IgwJHyD30vLcsPJiyIlpqhyGSfVbPIP6vuRvJYu+l7C3dDP5hsepIl9ZAWG6K1+2Ddoh0W7SI4k30SjfBRX9GJxhiwX0PmQAsc4C9wViN/6BF5XrCVgTPA5l7seBjfkRs8CeqvqLk5/bjRCUSfDa/1ecsefjrVJFreSFReRDUpivwKDLsZh+JjMYtIjyn5REEPQ5hPOUTkkq7/mRIrwhT9X2T0tT7cVDap1s6cByYcjARMRxf/K7w3nZe2acAPGg/z1lkypu4mXWLtvB7kZRW5tf0jiU0c=
