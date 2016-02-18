@@ -58,6 +58,12 @@ end
 group :production do
   gem 'rails_12factor'
 end
+
 gem 'puma'
+gem 'bootstrap-sass', '~> 3.0'
+
+gem 'carrierwave'
+gem 'mini_magick'
+
 
 
