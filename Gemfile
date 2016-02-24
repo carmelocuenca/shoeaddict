@@ -52,6 +52,10 @@ end
 
 group :test do
   gem 'capybara'
+  # Poltergeist is a driver for Capybara.
+  # It allows you to run your Capybara tests on a headless WebKit browser, provided by PhantomJS.
+  gem 'poltergeist'
+  gem 'phantomjs', :require => 'phantomjs/poltergeist'
 end
 
 

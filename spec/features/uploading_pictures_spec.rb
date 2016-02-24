@@ -1,17 +1,17 @@
 require 'rails_helper'
 
-describe 'Uploading pictures' do
+describe 'Uploading pictures', js: true do
 
   before do
     visit '/'
     click_link 'New Shoe'
   end
 
-  # @javascript
-  it 'with valid data' do
-    # attach_file 'Picture', 'spec/fixtures/picture.jpg'
+
+  it 'with valid data' , driver: :poltergeist do
+    attach_file 'Picture', 'spec/fixtures/picture.jpg'
     click_button 'Upload Picture'
-    # expect(page).to have_content('File "picture.jpg" has been uploaded to S3.')
+    expect(page).to have_content('File "picture.jpg" has been uploaded to S3.')
 
 
     fill_in 'Name', with: 'This is a name'
