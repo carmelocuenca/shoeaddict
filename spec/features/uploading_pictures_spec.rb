@@ -7,9 +7,15 @@ describe 'Uploading pictures' do
     click_link 'New Shoe'
   end
 
+  # @javascript
   it 'with valid data' do
+    # attach_file 'Picture', 'spec/fixtures/picture.jpg'
+    click_button 'Upload Picture'
+    # expect(page).to have_content('File "picture.jpg" has been uploaded to S3.')
+
+
     fill_in 'Name', with: 'This is a name'
-    attach_file 'Picture', 'spec/fixtures/picture.jpg'
+
     fill_in 'Designer', with: 'This is a designer'
     fill_in 'Description', with: 'This is a description'
     fill_in 'Color', with: 'This is a color'

@@ -67,5 +67,8 @@ gem 'mini_magick'
 
 gem 'fog'
 
+# Process your uploads in the background by uploading directly to S3
+gem 'carrierwave_direct', :git => "git://github.com/dwilkie/carrierwave_direct.git"
+
 
 
